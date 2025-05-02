@@ -9,7 +9,8 @@ integrates agentic RAG, speech processing, and contextual automation to create a
  Speaker Identification
  Live Summarization & Timestamping
  Continuous Summary Updates
- 2. Multi-Agent System Design
+
+ 3. Multi-Agent System Design
  a. Summary and Minutes Agent
  Generates comprehensive end-of-meeting summaries
  Produces formal MoM documents with customizable formats
