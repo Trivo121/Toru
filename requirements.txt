@@ -1,0 +1,5 @@
+Flask
+Flask-Sock
+Flask-SQLAlchemy
+websockets
+openai

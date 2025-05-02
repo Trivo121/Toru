@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meeting Assistant</title>
+  <script src='https://meet.jit.si/external_api.js'></script>
+  <style>
+    #transcript, #summary {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+      height: 200px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <h2>Live Meeting Assistant</h2>
+
+  <div id="meet"></div>
+  <button onclick="startTranscription()">Start Transcription</button>
+
+  <h3>Transcript:</h3>
+  <div id="transcript"></div>
+
+  <h3>Summary:</h3>
+  <div id="summary"></div>
+
+  <script>
+    const domain = "meet.jit.si";
+    const options = {
+      roomName: "LiveMeetingRoom123",
+      width: 700,
+      height: 400,
+      parentNode: document.querySelector('#meet'),
+    };
+    const api = new JitsiMeetExternalAPI(domain, options);
+
+    let socket;
+
+    function startTranscription() {
+      socket = new WebSocket("ws://localhost:5000/transcribe");
+
+      socket.onopen = () => {
+        console.log("WebSocket connected");
+        captureAudio();
+      };
+
+      socket.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        if (data.text) {
+          document.getElementById("transcript").innerText += data.text + "\n";
+        }
+        if (data.summary) {
+          document.getElementById("summary").innerText = data.summary;
+        }
+      };
+    }
+
+    async function captureAudio() {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const recorder = new MediaRecorder(stream);
+
+      recorder.ondataavailable = async (e) => {
+        if (e.data.size > 0 && socket.readyState === WebSocket.OPEN) {
+          const arrayBuffer = await e.data.arrayBuffer();
+          socket.send(arrayBuffer);
+        }
+      };
+
+      recorder.start(1000); // Send audio every 1 second
+    }
+  </script>
+</body>
+</html>
