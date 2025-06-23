@@ -1,5 +1,5 @@
 # Toru
- It is an advanced AI-powered tool designed to enhance the efficiency  and productivity of online meetings through real-time assistance and intelligent automation. Using multi agemnt freatures
+ It is an advanced AI-powered tool designed to enhance the efficiency  and productivity of online meetings through real-time assistance and intelligent automation. Using multi agemnt freatures.
 
  We are building a Real-Time Meeting Assistant Agent designed to go beyond basic transcription. The assistant 
 integrates agentic RAG, speech processing, and contextual automation to create a real-time co-pilot for meetings.
