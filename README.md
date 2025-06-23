@@ -6,7 +6,7 @@ integrates agentic RAG, speech processing, and contextual automation to create a
  Key Features:
  1. Real-Time Transcription and Live Summarization
  Speech-to-Text Conversion
- Speaker Identification
+ Speaker Identification 
  Live Summarization & Timestamping
  Continuous Summary Updates
 
